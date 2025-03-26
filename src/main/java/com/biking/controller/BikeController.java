@@ -35,4 +35,9 @@ public class BikeController {
     public ResponseEntity<Bike> fetchBikeByName(@RequestParam String bikeName) {
         return ResponseEntity.ok(this.bikeService.getByName(bikeName));
     }
+
+    @GetMapping("/status")
+    public ResponseEntity<String> getStatus() {
+        return ResponseEntity.ok("up");
+    }
 }
