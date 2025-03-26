@@ -1,9 +1,4 @@
-server:
-  port: 8081
-
 spring:
-  application:
-    name: biking
   datasource:
     url: jdbc:mysql://localhost:3306/biking
     username: root
