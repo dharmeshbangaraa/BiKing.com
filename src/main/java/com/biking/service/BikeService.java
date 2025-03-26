@@ -8,4 +8,6 @@ import java.util.List;
 public interface BikeService {
 
     List<Bike> uploadCSV(MultipartFile file);
+    List<Bike> getAllBikes();
+    Bike getByName(String bikeName);
 }

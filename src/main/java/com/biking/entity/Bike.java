@@ -16,6 +16,8 @@ public class Bike {
     private String onRoadPrice;
     private String engineCapacity;
     private String mileageARAI;
+    private String category;
+    private String brand;
     private String fuelTankCapacity;
     private String kerbWeight;
     private String power;

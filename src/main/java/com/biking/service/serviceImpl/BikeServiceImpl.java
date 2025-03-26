@@ -31,6 +31,16 @@ public class BikeServiceImpl implements BikeService {
         return parsedBikeList;
     }
 
+    @Override
+    public List<Bike> getAllBikes() {
+        return this.bikeRepository.findAll();
+    }
+
+    @Override
+    public Bike getByName(String bikeName) {
+        return this.bikeRepository.findByName(bikeName).orElse(null);
+    }
+
     List<Bike> parseCSV(MultipartFile file) {
         List<Bike> bikeList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
@@ -44,6 +54,8 @@ public class BikeServiceImpl implements BikeService {
                 bike.setOnRoadPrice(record.get("onRoadPrice"));
                 bike.setEngineCapacity(record.get("engineCapacity"));
                 bike.setMileageARAI(record.get("mileageARAI"));
+                bike.setCategory(record.get("category"));
+                bike.setBrand(record.get("brand"));
                 bike.setFuelTankCapacity(record.get("fuelTankCapacity"));
                 bike.setKerbWeight(record.get("kerbWeight"));
                 bike.setPower(record.get("power"));
