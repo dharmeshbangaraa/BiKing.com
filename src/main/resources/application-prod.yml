@@ -4,4 +4,6 @@ spring:
     username: ${PROD_DB_USER}
     password: ${PROD_DB_PASSWORD}
   jpa:
-    hibernate: create
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
