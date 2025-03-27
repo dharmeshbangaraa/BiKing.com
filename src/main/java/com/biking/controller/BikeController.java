@@ -40,4 +40,9 @@ public class BikeController {
     public ResponseEntity<String> getStatus() {
         return ResponseEntity.ok("up");
     }
+
+    @GetMapping("/brand")
+    public ResponseEntity<List<Bike>> fetchBikesWithBrand(@RequestParam String brand) {
+        return ResponseEntity.ok(this.bikeService.getByBrand(brand));
+    }
 }

@@ -41,6 +41,11 @@ public class BikeServiceImpl implements BikeService {
         return this.bikeRepository.findByName(bikeName).orElse(null);
     }
 
+    @Override
+    public List<Bike> getByBrand(String brand) {
+        return this.bikeRepository.findAllByBrand(brand).orElse(List.of());
+    }
+
     List<Bike> parseCSV(MultipartFile file) {
         List<Bike> bikeList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
