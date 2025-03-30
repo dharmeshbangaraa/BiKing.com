@@ -5,9 +5,13 @@ import com.biking.entity.Bike;
 import com.biking.repository.BikeRepository;
 import com.biking.service.BikeService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class BikeServiceImpl implements BikeService {
@@ -25,6 +30,8 @@ public class BikeServiceImpl implements BikeService {
     private final BikeRepository bikeRepository;
 
     @Override
+    @CacheEvict(value = "BIKES", allEntries = true) // Clears cache before saving new data
+    @CachePut(value = "BIKES", key = "'allBikes'") // Updates cache after saving new data
     public List<Bike> uploadCSV(MultipartFile file) {
         List<Bike> parsedBikeList = parseCSV(file);
         this.bikeRepository.saveAll(parsedBikeList);
@@ -32,17 +39,23 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @Cacheable(value = "BIKES", key = "'allBikes'")
     public List<Bike> getAllBikes() {
+        log.info("getAllBikes() executed DB");
         return this.bikeRepository.findAll();
     }
 
     @Override
+    @Cacheable(value = "BIKES", key = "#bikeName")
     public Bike getByName(String bikeName) {
+        log.info("getByName() executed DB");
         return this.bikeRepository.findByName(bikeName).orElse(null);
     }
 
     @Override
+    @Cacheable(value = "BIKES", key = "#brand")
     public List<Bike> getByBrand(String brand) {
+        log.info("getByBrand() executed DB");
         return this.bikeRepository.findAllByBrand(brand).orElse(List.of());
     }
 
