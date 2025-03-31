@@ -10,6 +10,4 @@ spring:
   cache:
     type: redis
   redis:
-    host: ${PROD_REDIS_HOST}
-    port: ${PROD_REDIS_PORT}
-    password: ${PROD_REDIS_PASSWORD}
+    url: ${PROD_REDIS_URL}
