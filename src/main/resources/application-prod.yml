@@ -10,4 +10,4 @@ spring:
   cache:
     type: redis
   redis:
-    url: ${PROD_REDIS_URL}
+    url: ${REDIS_PUBLIC_URL}
