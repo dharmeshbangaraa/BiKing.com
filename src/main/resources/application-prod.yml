@@ -7,3 +7,8 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
+  data:
+    redis:
+      host: redis-11320.crce182.ap-south-1-1.ec2.redns.redis-cloud.com
+      port: 11320
+      password: iDNs1dEjVN19zabbtEzy3fYCEgSNisVS

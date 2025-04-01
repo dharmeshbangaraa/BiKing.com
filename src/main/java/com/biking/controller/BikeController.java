@@ -45,4 +45,14 @@ public class BikeController {
     public ResponseEntity<List<Bike>> fetchBikesWithBrand(@RequestParam String brand) {
         return ResponseEntity.ok(this.bikeService.getByBrand(brand));
     }
+
+    @GetMapping("/dummy")
+    public ResponseEntity<Bike> fetchAllBikesDummy() {
+        return ResponseEntity.ok(this.bikeService.getAllBikesDummy());
+    }
+
+    @PostMapping("/dummy")
+    public ResponseEntity<Bike> addBike(@RequestBody Bike bike) {
+        return ResponseEntity.ok(this.bikeService.addBike(bike));
+    }
 }
