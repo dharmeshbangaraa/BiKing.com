@@ -65,6 +65,7 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @Cacheable(value = "BIKES", key = "#brand") // Cache each bike separately by name
     public List<Bike> getByBrand(String brand) {
         log.info("getByBrand() executed DB");
         return this.bikeRepository.findAllByBrand(brand).orElse(List.of());
