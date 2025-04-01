@@ -7,7 +7,3 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
-  cache:
-    type: redis
-  redis:
-    url: ${REDIS_PUBLIC_URL}

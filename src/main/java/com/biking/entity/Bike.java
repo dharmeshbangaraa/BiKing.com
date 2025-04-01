@@ -4,11 +4,9 @@ package com.biking.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Entity
 @Data
-public class Bike implements Serializable {
+public class Bike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
