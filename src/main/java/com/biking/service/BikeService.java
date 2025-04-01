@@ -9,6 +9,8 @@ public interface BikeService {
 
     List<Bike> uploadCSV(MultipartFile file);
     List<Bike> getAllBikes();
+    Bike getAllBikesDummy();
     Bike getByName(String bikeName);
     List<Bike> getByBrand(String brand);
+    Bike addBike(Bike bike);
 }

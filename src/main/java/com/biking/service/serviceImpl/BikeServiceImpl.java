@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +29,7 @@ public class BikeServiceImpl implements BikeService {
     private final BikeRepository bikeRepository;
 
     @Override
+    @CachePut(value = "BIKES", key = "'allBikes'")
     public List<Bike> uploadCSV(MultipartFile file) {
         List<Bike> parsedBikeList = parseCSV(file);
         this.bikeRepository.saveAll(parsedBikeList);
@@ -34,12 +37,28 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
+    @Cacheable(value = "BIKES", key = "'allBikes'")
     public List<Bike> getAllBikes() {
         log.info("getAllBikes() executed DB");
         return this.bikeRepository.findAll();
     }
 
     @Override
+    @CachePut(value = "BIKES", key = "'allBikes'") // Stores newly saved bike in cache
+    public Bike addBike(Bike bike) {
+        log.info("Bike saved to DB");
+        return this.bikeRepository.save(bike);
+    }
+
+    @Override
+    @Cacheable(value = "BIKES", key = "'allBikes'") // Use a fixed key
+    public Bike getAllBikesDummy() {
+        log.info("getAllBikesDummy() executed DB");
+        return this.bikeRepository.findAll().get(1);
+    }
+
+    @Override
+    @Cacheable(value = "BIKES", key = "#bikeName") // Cache each bike separately by name
     public Bike getByName(String bikeName) {
         log.info("getByName() executed DB");
         return this.bikeRepository.findByName(bikeName).orElse(null);
