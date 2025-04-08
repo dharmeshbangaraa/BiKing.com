@@ -20,8 +20,8 @@ public class BikeReviewServiceImpl implements BikeReviewService {
     }
 
     @Override
-    public BikeReview fetchReviewByBikeName(String bikeName) {
-        return this.bikeReviewRepository.findByBikeName(bikeName).orElse(null);
+    public List<BikeReview> fetchReviewByBikeName(String bikeName) {
+        return this.bikeReviewRepository.findByBikeName(bikeName).orElse(List.of());
     }
 
     @Override

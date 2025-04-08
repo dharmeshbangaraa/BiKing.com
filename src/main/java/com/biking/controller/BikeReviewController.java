@@ -22,7 +22,7 @@ public class BikeReviewController {
     }
 
     @GetMapping("/name")
-    public ResponseEntity<BikeReview> fetchByBikeName(@RequestParam String bikeName) {
+    public ResponseEntity<List<BikeReview>> fetchByBikeName(@RequestParam String bikeName) {
         return ResponseEntity.ok(this.bikeReviewService.fetchReviewByBikeName(bikeName));
     }
 
