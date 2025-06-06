@@ -29,7 +29,7 @@ public class BikeServiceImpl implements BikeService {
     private final BikeRepository bikeRepository;
 
     @Override
-    @CachePut(value = "BIKES", key = "'allBikes'")
+//    @CachePut(value = "BIKES", key = "'allBikes'")
     public List<Bike> uploadCSV(MultipartFile file) {
         List<Bike> parsedBikeList = parseCSV(file);
         this.bikeRepository.saveAll(parsedBikeList);
@@ -37,35 +37,35 @@ public class BikeServiceImpl implements BikeService {
     }
 
     @Override
-    @Cacheable(value = "BIKES", key = "'allBikes'")
+//    @Cacheable(value = "BIKES", key = "'allBikes'")
     public List<Bike> getAllBikes() {
         log.info("getAllBikes() executed DB");
         return this.bikeRepository.findAll();
     }
 
     @Override
-    @CachePut(value = "BIKES", key = "'allBikes'") // Stores newly saved bike in cache
+//    @CachePut(value = "BIKES", key = "'allBikes'") // Stores newly saved bike in cache
     public Bike addBike(Bike bike) {
         log.info("Bike saved to DB");
         return this.bikeRepository.save(bike);
     }
 
     @Override
-    @Cacheable(value = "BIKES", key = "'allBikes'") // Use a fixed key
+//    @Cacheable(value = "BIKES", key = "'allBikes'") // Use a fixed key
     public Bike getAllBikesDummy() {
         log.info("getAllBikesDummy() executed DB");
         return this.bikeRepository.findAll().get(1);
     }
 
     @Override
-    @Cacheable(value = "BIKES", key = "#bikeName") // Cache each bike separately by name
+//    @Cacheable(value = "BIKES", key = "#bikeName") // Cache each bike separately by name
     public Bike getByName(String bikeName) {
         log.info("getByName() executed DB");
         return this.bikeRepository.findByName(bikeName).orElse(null);
     }
 
     @Override
-    @Cacheable(value = "BIKES", key = "#brand") // Cache each bike separately by name
+//    @Cacheable(value = "BIKES", key = "#brand") // Cache each bike separately by name
     public List<Bike> getByBrand(String brand) {
         log.info("getByBrand() executed DB");
         return this.bikeRepository.findAllByBrand(brand).orElse(List.of());
