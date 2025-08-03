@@ -1,4 +1,10 @@
 spring:
+  main:
+    lazy-initialization: true
+  task:
+    execution:
+      pool:
+        max-size: 10
   datasource:
     url: ${PROD_DB_URL}
     username: ${PROD_DB_USER}
