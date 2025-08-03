@@ -1,7 +1,11 @@
 server:
+  tomcat:
+    max-threads: 20
   port: 8081
 
 spring:
+  profiles:
+    active: local
   application:
     name: biking
   datasource:
